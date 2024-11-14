@@ -58,7 +58,20 @@ void print_feedback(const char *guess, const char *secret) {
     printf("\n");
 }
 
-int main() {
+void display_instructions() {
+    printf(MAGENTA "\n===== How to Play Wordle =====\n" RESET);
+    printf("1. You have %d attempts to guess the secret 5-letter word.\n", MAX_ATTEMPTS);
+    printf("2. After each guess, you will receive feedback:\n");
+    printf("   - " GREEN "Green" RESET ": Letter is correct and in the correct position.\n");
+    printf("   - " YELLOW "Yellow" RESET ": Letter is correct but in the wrong position.\n");
+    printf("   - " RED "Red underscore" RESET ": Letter is not in the word.\n");
+    printf("3. Enter a valid 5-letter word each time. Invalid words will prompt an error.\n");
+    printf("4. Try to guess the word within the allowed attempts to win!\n\n");
+    printf("Press Enter to start the game...\n");
+    while (getchar() != '\n'); // Wait for the user to press Enter
+}
+
+void start_game() {
     srand(time(NULL));
     const char *secret = word_list[rand() % WORD_LIST_SIZE];
     char guess[WORD_LENGTH + 1];
@@ -82,10 +95,32 @@ int main() {
 
         if (strcmp(guess, secret) == 0) {
             printf(GREEN "Congratulations! You've guessed the word: %s\n" RESET, secret);
-            return 0;
+            return;
         }
     }
 
     printf(RED "Sorry! You've used all attempts. The word was: %s\n" RESET, secret);
+}
+
+int main() {
+    char choice;
+
+    // Starting menu
+    printf(MAGENTA "===== Welcome to Wordle =====\n" RESET);
+    printf("Press Enter to play or type 'Q' to quit: ");
+    
+    choice = getchar();
+    if (choice == 'Q' || choice == 'q') {
+        printf(RED "Exiting the game. Goodbye!\n" RESET);
+        return 0;
+    }
+    // Consume any remaining characters in the input buffer
+    if (choice != '\n') {
+        while (getchar() != '\n');
+    }
+
+    // Display instructions and start the game
+    display_instructions();
+    start_game();
     return 0;
 }
