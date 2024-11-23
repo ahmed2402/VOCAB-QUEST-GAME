@@ -1,5 +1,7 @@
 
 
+
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -155,7 +157,7 @@ void start_game(int level)
     int attempts = 0;
     int hint_given = 0;
 
-    printf(MAGENTA "\nWelcome to VOCAB QUEST - Level %d!\n" RESET, level + 1);
+    printf(MAGENTA "\nWelcome to Wordle - Level %d!\n" RESET, level + 1);
     printf(BLUE "Guess the %d-letter word. You have %d attempts.\n\n" RESET, word_length, MAX_ATTEMPTS);
 
     while (attempts < MAX_ATTEMPTS)
@@ -202,7 +204,7 @@ int main()
     char choice;
     int level = 0;
 
-    printf(MAGENTA "\n========== Welcome to VOCAB QUEST ==========\n" RESET);
+    printf(MAGENTA "\n========== Welcome to Wordle ==========\n" RESET);
     printf("Press Enter to play or type 'Q' to quit: ");
 
     choice = getchar();
@@ -228,6 +230,6 @@ int main()
         }
     }
 
-    printf(GREEN "You've completed all levels. Thank you for playing VOCAB QUEST!\n\n" RESET);
+    printf(GREEN "You've completed all levels. Thanks for playing Wordle!\n\n" RESET);
     return 0;
 }
